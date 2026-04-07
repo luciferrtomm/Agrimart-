@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="cart-overlay"></div>
+
+<div class="cart-container">
+
+    <!-- HEADER -->
+    <div class="cart-header">
+        <h2>🛒 My Cart</h2>
+        <a href="/marketplace">❌</a>
+    </div>
+
+    <!-- CART ITEMS -->
+    <div class="cart-items">
+
+        {% for item, product in items %}
+
+        <div class="cart-item">
+
+            {% if product.image %}
+            <img src="{{ url_for('static', filename='product_images/' + product.image) }}" class="cart-img">
+            {% else %}
+            <img src="{{ url_for('static', filename='images/fruits.jpg') }}" class="cart-img">
+            {% endif %}
+
+            <div class="cart-info">
+                <h4>{{ product.name }}</h4>
+                <p>₹ {{ product.price }}</p>
+            </div>
+
+            <div class="cart-controls">
+                <a href="/decrease_cart/{{ product.id }}" class="qty-btn">-</a>
+                <span>{{ item.quantity }}</span>
+                <a href="/add_to_cart/{{ product.id }}" class="qty-btn">+</a>
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <!-- BILL DETAILS -->
+    <div class="cart-summary">
+
+        <h3>Bill Details</h3>
+
+        <p>Items Total: ₹ {{ total }}</p>
+
+        {% if delivery_charge == 0 %}
+            <p>Delivery: <span style="color:green;">FREE</span></p>
+        {% else %}
+            <p>Delivery: ₹ {{ delivery_charge }}</p>
+        {% endif %}
+
+        <!-- 🔥 FREE DELIVERY MESSAGE -->
+        {% if total < 800 %}
+            <p style="color:red;">
+                Add ₹ {{ 800 - total }} more for FREE delivery 🚚
+            </p>
+        {% endif %}
+
+        <h3>Total: ₹ {{ grand_total }}</h3>
+
+        <!-- ✅ CHECKOUT BUTTON -->
+        <button onclick="window.location.href='/checkout'" class="checkout-btn">
+            Proceed to Checkout
+        </button>
+
+    </div>
+
+</div>
+
+{% endblock %}

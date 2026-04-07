@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>AgriMart Marketplace</title>
+
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/marketplace.css') }}">
+
+</head>
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <h1>AgriMart Marketplace</h1>
+
+    <!-- ✅ SEARCH BAR HERE -->
+    <input type="text" placeholder="Search products..." class="search-bar">
+
+    <div class="nav">
+        <a href="/">Home</a>
+        <a href="/cart">Cart</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</div>
+
+</div>
+
+
+
+<!-- CATEGORY SECTION -->
+
+<div class="category-section">
+
+<a href="/marketplace" class="category-card">
+
+<img src="{{ url_for('static', filename='images/fruits.jpg') }}">
+
+<p>All</p>
+
+</a>
+
+<a href="/category/Fruits" class="category-card">
+
+<img src="{{ url_for('static', filename='images/fruits.jpg') }}">
+
+<p>Fruits</p>
+
+</a>
+
+<a href="/category/Vegetables" class="category-card">
+
+<img src="{{ url_for('static', filename='images/field.jpg') }}">
+
+<p>Vegetables</p>
+
+</a>
+
+<a href="/category/Dairy" class="category-card">
+
+<img src="{{ url_for('static', filename='images/farm.webp') }}">
+
+<p>Dairy Products</p>
+
+</a>
+
+<a href="/category/Flowers" class="category-card">
+
+<img src="{{ url_for('static', filename='images/crops.jpg') }}">
+
+<p>Flowers / Nursery</p>
+
+</a>
+
+</div>
+
+
+
+<!-- TITLE -->
+
+<h2 class="market-title">Fresh Products from Farmers</h2>
+
+
+
+<!-- PRODUCT GRID -->
+
+<div class="product-container">
+
+{% for product in products %}
+
+<div class="product-card">
+
+
+{% if product.image %}
+<img src="{{ url_for('static', filename='product_images/' + product.image) }}" class="product-image">
+{% else %}
+<img src="{{ url_for('static', filename='images/fruits.jpg') }}" class="product-image">
+{% endif %}
+
+
+<h3>{{ product.name }}</h3>
+
+<p class="price">₹ {{ product.price }}</p>
+
+<p class="category">{{ product.category }}</p>
+
+<p class="desc">{{ product.description }}</p>
+
+<h4>{{ product.name }}</h4>
+
+<p class="rating">⭐⭐⭐⭐☆ (4.2)</p>
+
+<p>₹ {{ product.price }}</p>
+
+<!-- CART CONTROLS -->
+
+<div class="cart-controls">
+
+<a href="/decrease_cart/{{ product.id }}" class="qty-btn">-</a>
+
+<span class="qty">
+
+{% for item in cart_items %}
+    {% if item.product_id == product.id %}
+        {{ item.quantity }}
+    {% endif %}
+{% endfor %}
+
+</span>
+
+<a href="/add_to_cart/{{ product.id }}" class="qty-btn">+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+</body>
+
+</html>

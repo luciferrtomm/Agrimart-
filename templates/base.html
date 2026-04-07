@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AgriMart</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+</head>
+
+<body>
+
+{% if request.path != '/cart' %}
+<header class="header">
+
+    <div class="logo">
+        AgriMart
+    </div>
+
+    <div class="auth-button">
+        <a href="/auth" class="signin-btn">Sign In</a>
+    </div>
+
+</header>
+
+<div class="container">
+{% endif %}
+
+<!-- ✅ ONLY ONE BLOCK -->      
+{% block content %}{% endblock %}
+
+{% if request.path != '/cart' %}
+</div>
+{% endif %}
+
+</body>
+
+</html> 

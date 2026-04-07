@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="hero">
+
+<h1>AgriMart</h1>
+
+<p>Fresh fruits, vegetables and crops directly from farmers</p>
+
+<a href="/marketplace" class="btn">Start Shopping</a>
+
+</div>
+
+
+<div class="image-section">
+
+<img src="{{ url_for('static', filename='images/farm.webp') }}">
+<img src="{{ url_for('static', filename='images/fruits.jpg') }}">
+<img src="{{ url_for('static', filename='images/crops.jpg') }}">
+<img src="{{ url_for('static', filename='images/field.jpg') }}">
+<img src="{{ url_for('static', filename='images/harvest.jpg') }}">
+
+</div>
+
+{% endblock %}

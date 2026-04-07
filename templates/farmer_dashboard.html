@@ -1,0 +1,116 @@
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>AgriMart Seller Dashboard</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h1>AgriMart</h1>
+
+<p class="tagline">
+Grow your farm business with AgriMart
+</p>
+
+<div class="steps">
+
+<div class="step active">Add Products</div>
+<div class="step">Manage Products</div>
+<div class="step">Orders</div>
+
+</div>
+
+<a href="/logout" class="logout-btn">Logout</a>
+
+
+</div> 
+
+
+<!-- MAIN CONTENT -->
+
+<div class="content">
+
+<h2>Add Product</h2>
+
+<p>Add products that consumers will see in the marketplace</p>
+
+
+<!-- PRODUCT FORM -->
+
+<form method="POST" enctype="multipart/form-data" class="product-form">
+
+<input type="text" name="name" placeholder="Product Name" required>
+
+<input type="number" name="price" placeholder="Price" required>
+
+<textarea name="description" placeholder="Product Description"></textarea>
+
+<select name="category" required>
+
+<option value="">Select Category</option>
+
+<option value="Fruits">Fruits</option>
+
+<option value="Vegetables">Vegetables</option>
+
+<option value="Dairy">Dairy Products</option>
+
+<option value="Flowers">Flowers / Nursery</option> 
+
+</select>
+
+<input type="file" name="image" required>
+
+<button type="submit">Add Product</button>
+
+</form>
+
+
+
+<h3>Your Listed Products</h3>
+
+
+<div class="product-list">
+
+{% for product in products %}
+
+<div class="product-card">
+
+{% if product.image %}
+<img src="{{ url_for('static', filename='product_images/' + product.image) }}">
+{% else %}
+<img src="{{ url_for('static', filename='images/fruits.jpg') }}">
+{% endif %}
+
+<h4>{{ product.name }}</h4>
+
+<p class="price">₹ {{ product.price }}</p>
+
+<p class="category">{{ product.category }}</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
+```
